@@ -41,3 +41,37 @@ URL: http://localhost:8000/redocs
 Public hosting API endpoint: https://defaulters-prediction.herokuapp.com/docs
 or
 https://defaulters-prediction.herokuapp.com/redocs
+
+## Test data:
+1. Use the below test data if required to test the model. The below data results a probability of 0.03 and the threshold is set at 0.5 to either identify it as defaulters or not; and this test data gives a response as non-defaulter.
+{
+  "account_amount_added_12_24m": 50956,
+  "account_days_in_dc_12_24m": 0,
+  "account_days_in_rem_12_24m": 77,
+  "account_days_in_term_12_24m": 0,
+  "account_incoming_debt_vs_paid_0_24m": 0,
+  "account_status": 1,
+  "age": 28,
+  "avg_payment_span_0_12m": 12.5,
+  "merchant_category": "Diversified entertainment",
+  "merchant_group": "Entertainment",
+  "has_paid": 1,
+  "max_paid_inv_0_24m": 91980,
+  "num_active_div_by_paid_inv_0_12m": 0,
+  "num_active_inv": 0,
+  "num_arch_dc_0_12m": 0,
+  "num_arch_dc_12_24m": 1,
+  "num_arch_ok_0_12m": 2,
+  "num_arch_ok_12_24m": 7,
+  "num_arch_rem_0_12m": 0,
+  "num_arch_written_off_0_12m": 0,
+  "num_arch_written_off_12_24m": 0,
+  "num_unpaid_bills": 0,
+  "status_last_archived_0_24m": 1,
+  "status_2nd_last_archived_0_24m": 1,
+  "status_max_archived_0_24_months": 3,
+  "recovery_debt": 0,
+  "sum_capital_paid_account_0_12m": 36163,
+  "sum_paid_inv_0_12m": 93760,
+  "time_hours": 20.3328
+}
