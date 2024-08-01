@@ -1,49 +1,58 @@
-# DefaultersPrediction
+# Defaulter Predictor: ML Model Deployment with FastAPI & Flask
 
-## This project has the below major parts:
+## Project Overview
 
-1. ML_Case_Study.ipynb: This file contains code for the Machine Learning model to predict the defaulters.
-2. model.pkl: This file contains the trained model saved using pickle.
-3. app.py - This file contains Fast APIs that receives the user details details as JSON format through GUI or API calls, computes the predicted probabilitites based on the model and returns it.
-4. main.py - This file contains Fast APIs for initial testing.
-5. DataFile.py - This file renders the json file and sends it to app.py.
-6. ProcFile Local - This file is required to render the API when accessed locally. Add this instead - web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app.
-7. ProcFile Public - This file is required to render the API when accessed on public domain. Add this - web: uvicorn app:app --host=0.0.0.0 --port=${PORT:-5000}.
-8. requirements.txt - Add the required libraries will be added to this file which will be installed during deployment.
-9. results.csv - Contains the results of the test dataset as requested.
+This project demonstrates a machine learning model for predicting defaulters. It includes components for model training, deployment, and API access using FastAPI and Flask. The project is structured as follows:
 
-## Running the project
+- **`ML_Case_Study.ipynb`**: Contains the code for training the machine learning model to predict defaulters.
+- **`model.pkl`**: A serialized file containing the trained model, saved using pickle.
+- **`app.py`**: FastAPI application that receives user details in JSON format, computes predicted probabilities based on the model, and returns the results.
+- **`main.py`**: FastAPI application used for initial testing.
+- **`DataFile.py`**: Renders the JSON file and sends it to `app.py`.
+- **`Procfile_Local`**: Configuration for local deployment with Gunicorn and Uvicorn. Use the following content:
+```
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app
+```
+- **`Procfile_Public`**: Configuration for public domain deployment. Use the following content:
+```
+web: uvicorn app
+--host=0.0.0.0 --port=${PORT:-5000}
+```
+- **`requirements.txt`**: Lists required libraries to be installed during deployment.
+- **`results.csv`**: Contains results of the test dataset.
 
-### In local:
-1. Ensure that you are in the project home directory. Make sure the serialized model.pkl file also exists in this directory.
+## Running the Project
 
-2. Install the pickle and uvicorn using the below comand
+### Local Deployment
 
-pip install pickle uvicorn
+1. **Navigate to the Project Directory**: Ensure you are in the project home directory where the `model.pkl` file is located.
 
-3. Make sure the ProcFile contains the below code:
-
+2. **Install Required Packages**:
+ ```bash
+ pip install pickle uvicorn
+```
+3. ** Configure `Procfile_local`**: Ensure the Procfile_Local contains the following:
+```
 web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app
-
-5. Run the below code to load the uvicorn API:
-
+```
+4. ** Run the FastAPI Application:**
+```
 uvicorn app:app --reload
+```
+5. **Access the API**: By default, the FastAPI server runs on port 8000. Navigate to:
+- [http://localhost:8000/docs](http://localhost:8000/docs) for the interactive API documentation
+- [http://localhost:8000/redocs](http://localhost:8000/redocs) for an alternative API documentation view
 
-8. By default, flask will run on port 8000, navigate to the below URL.
+### Public Deployment
 
-URL: http://localhost:8000/docs
-or
-URL: http://localhost:8000/redocs
+1. **Access the Model API**: Once deployed publicly, you can access the API at:
+- [https://defaulters-prediction.herokuapp.com/docs](https://defaulters-prediction.herokuapp.com/docs)
+- [https://defaulters-prediction.herokuapp.com/redocs](https://defaulters-prediction.herokuapp.com/redocs)
 
-### On the public domain:
-1. Access the model API from the below link:
+## Test Data
 
-Public hosting API endpoint: https://defaulters-prediction.herokuapp.com/docs
-or
-https://defaulters-prediction.herokuapp.com/redocs
-
-## Test data:
-1. Use the below test data if required to test the model. The below data results a probability of 0.03 and the threshold is set at 0.5 to either identify it as defaulters or not; and this test data gives a response as non-defaulter.
+Use the following test data to evaluate the model. This data yields a probability of 0.03 with a threshold set at 0.5, indicating a non-defaulter response:
+```
 {
   "account_amount_added_12_24m": 50956,
   "account_days_in_dc_12_24m": 0,
@@ -75,3 +84,4 @@ https://defaulters-prediction.herokuapp.com/redocs
   "sum_paid_inv_0_12m": 93760,
   "time_hours": 20.3328
 }
+```
